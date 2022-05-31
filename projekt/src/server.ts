@@ -3,6 +3,8 @@ import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/Logging';
+import sklepRoutes from './routes/Sklep';
+import graRoutes from './routes/Gra';
 
 const router = express();
 
@@ -48,13 +50,16 @@ const StartServer = () => {
     });
 
     // Routes //
+    router.use('/sklepy', sklepRoutes);
+    router.use('/gry', graRoutes)
 
     // Sprawdzanie stanu //
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));
 
     // Obsługa błędów //
     router.use((req, res, next) => {
-        const error = new Error('not found');
+        const error = new Error('nie znaleziono');
+        
         Logging.error(error);
 
         return res.status(404).json({ message: error.message });

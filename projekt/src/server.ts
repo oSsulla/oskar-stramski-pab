@@ -11,11 +11,11 @@ const router = express();
 // Łączenie z Mongo //
 mongoose.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
 .then(() => { 
-    Logging.info('Connected to MongoDB');
+    Logging.info('Połączono z MongoDB');
     StartServer();
 })
 .catch(error => {
-    Logging.error('Unable to connect: ');
+    Logging.error('Nie można połączyć: ');
     Logging.error(error);
 });
 
@@ -54,7 +54,7 @@ const StartServer = () => {
     router.use('/gry', graRoutes)
 
     // Sprawdzanie stanu //
-    router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));
+    router.get('/hello', (req, res, next) => res.status(200).json({ message: 'world' }));
 
     // Obsługa błędów //
     router.use((req, res, next) => {
@@ -65,5 +65,5 @@ const StartServer = () => {
         return res.status(404).json({ message: error.message });
     });
 
-    http.createServer(router).listen(config.server.port, () => Logging.info(`Server is running on port ${config.server.port}.`));
+    http.createServer(router).listen(config.server.port, () => Logging.info(`Serwer działa na porcie ${config.server.port}.`));
 };

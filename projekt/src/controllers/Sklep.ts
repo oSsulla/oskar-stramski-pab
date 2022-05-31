@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 import Sklep from "../models/Sklep";
 
 const createSklep = (req: Request, res: Response, next: NextFunction) => {
-    const { nazwa } = req.body;
+    const { nazwa, lokalizacja } = req.body;
 
     const sklep = new Sklep({
         _id: new mongoose.Types.ObjectId(),
-        nazwa
+        nazwa,
+        lokalizacja
     });
 
     return sklep

@@ -8,7 +8,8 @@ export interface ISklepModel extends ISklep, Document {}
 
 const SklepSchema: Schema = new Schema(
     {
-        nazwa: { type: String, required: true }
+        nazwa: { type: String, required: true },
+        lokalizacja: { type: String, required: true }
     },
     {
         versionKey: false

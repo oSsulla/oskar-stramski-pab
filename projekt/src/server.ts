@@ -23,11 +23,11 @@ mongoose.connect(config.mongo.url, { retryWrites: true, w: 'majority' })
 const StartServer = () => {
     router.use((req, res, next) => {
         // Rejestracja prośby //
-        Logging.info(`Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
+        Logging.info(`Wywołana -> Metoda: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
         res.on('finish', () => {
             // Rejestracja odpowiedzi //
-            Logging.info(`Incoming -> Method: [${req.method}] - Url: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${res.statusCode}]`);
+            Logging.info(`Wywołana -> Metoda: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${res.statusCode}]`);
         });
 
         next();
